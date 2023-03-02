@@ -12,7 +12,7 @@ namespace Mission9.Models
     {
         [Key]
         [Required]
-        public long BookId { get; set; }
+        public int BookId { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
@@ -26,7 +26,7 @@ namespace Mission9.Models
         [Required]
         public string Category { get; set; }
         [Required]
-        public long PageCount { get; set; }
+        public int PageCount { get; set; }
         [Required]
         public double Price { get; set; }
     }
