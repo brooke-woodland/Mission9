@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Mission9.Models
 {
+    //db first method
     public class EFBookstoreRespository : IBookstoreRepository
     {
         private BookstoreContext context { get; set; }

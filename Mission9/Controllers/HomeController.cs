@@ -19,10 +19,12 @@ namespace Mission9.Controllers
 
         public IActionResult Index(int pageNum = 1)
         {
+            //determine how many books on each page
             int pageSize = 10;
 
             var x = new BooksViewModel
             {
+                // grab the sections of books
                 Books = repo.Books
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * pageSize)

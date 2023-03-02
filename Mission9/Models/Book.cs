@@ -10,6 +10,8 @@ namespace Mission9.Models
 {
     public partial class Book
     {
+        //added required and changed longs to ints
+
         [Key]
         [Required]
         public int BookId { get; set; }

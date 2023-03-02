@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 // #nullable disable
 
 namespace Mission9.Models
-{
+{    //db first method
     public class BookstoreContext : DbContext
     {
         public BookstoreContext()

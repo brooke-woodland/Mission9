@@ -39,6 +39,7 @@ namespace Mission9.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
+            // this loop dynamically creates a link for each section of books
             for (int i = 1; i <= PageBlah.TotalPages; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
