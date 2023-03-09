@@ -22,12 +22,14 @@ namespace Mission9.Pages
         public string ReturnUrl { get; set; }
         public void OnGet(string returnUrl)
         {
+            // create a new cart if one does not exist, if it does, go to the cart
             ReturnUrl = returnUrl ?? "/";
             cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
         public IActionResult OnPost(int bookId, string returnUrl)
         {
+            //pass the book object to the shop page in a Json format so it can be a string and have all the info needed
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
             cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();

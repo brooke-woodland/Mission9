@@ -2,11 +2,13 @@
 }
 @model IEnumerable<string>
 <div class="d-grid gap-2">
+    <!-- have to set routes to defaults to go back to default page-->
 <a asp-controller="Home" asp-action="Index" asp-route-category="" asp-route-pageNum="1" class="btn btn-outline-secondary">Home</a>
 
 
 @foreach (string t in Model)
             {
+    // if statement to change button classes based on if that filter is selected
                 <a asp-controller="Home" asp-action="Index" asp-route-pageNum="1" asp-route-category ="@t" 
                    class="btn @(ViewBag.SelectedCategory == t ? "btn-primary": "btn-outline-secondary")">@t</a>
 

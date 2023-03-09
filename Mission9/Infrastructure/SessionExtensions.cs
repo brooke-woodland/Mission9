@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mission9.Infrastructure
 {
+    //don't understand, but this is creating the session to allow cart items to persist
     public static class SessionExtensions
     {
         public static void SetJson(this ISession session, string key, object value)

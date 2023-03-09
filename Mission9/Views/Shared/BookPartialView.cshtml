@@ -21,6 +21,7 @@
         </ul>
     </div>
 
+    <!--form to submit id to the shop page-->
     <form method="post" asp-page="/Shop">
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <input type="hidden" asp-for="@Model.BookId" />

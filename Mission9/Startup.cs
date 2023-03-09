@@ -54,6 +54,7 @@ namespace Mission9
             app.UseSession();
             app.UseRouting();
 
+            //endpoints. the order determines url order and order for finding the page?
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("categorypage", "{category}/Page{pageNum}", new { Controller = "Home", action = "Index" });
