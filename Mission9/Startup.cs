@@ -28,12 +28,17 @@ namespace Mission9
         {
             // tells asp to use MVC model
             services.AddControllersWithViews();
+
             services.AddDbContext<BookstoreContext>(options =>
            {
                options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
            });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRespository>();
+
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,13 +51,28 @@ namespace Mission9
 
             //corresponds to wwwroot
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage", "{category}/Page{pageNum}", new { Controller = "Home", action = "Index" });
+
+
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page_{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum=1});
+
+                endpoints.MapControllerRoute("category", "{category}",
+                new { Controller = "Home", action = "Index", pageNum = 1 });
+
+
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
+
         }
     }
 }

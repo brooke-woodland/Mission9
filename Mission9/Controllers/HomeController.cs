@@ -17,7 +17,7 @@ namespace Mission9.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             //determine how many books on each page
             int pageSize = 10;
@@ -26,13 +26,14 @@ namespace Mission9.Controllers
             {
                 // grab the sections of books
                 Books = repo.Books
-                .OrderBy(b => b.Title)
+                .Where(x => x.Category== category || category == null )
+                .OrderBy(x => x.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks = (category==null ? repo.Books.Count() : repo.Books.Where(x=> x.Category ==category).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }
