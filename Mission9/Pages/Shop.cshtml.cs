@@ -13,9 +13,10 @@ namespace Mission9.Pages
     {
         private IBookstoreRepository repo { get; set; }
 
-        public ShopModel (IBookstoreRepository temp)
+        public ShopModel (IBookstoreRepository temp, Cart c)
         {
             repo = temp;
+            cart = c;
         }
 
         public Cart cart { get; set; }
@@ -24,18 +25,21 @@ namespace Mission9.Pages
         {
             // create a new cart if one does not exist, if it does, go to the cart
             ReturnUrl = returnUrl ?? "/";
-            cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-        }
 
+        }
         public IActionResult OnPost(int bookId, string returnUrl)
         {
             //pass the book object to the shop page in a Json format so it can be a string and have all the info needed
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
-            cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             cart.AddItem(b, 1);
 
-            HttpContext.Session.SetJson("cart", cart);
+            return RedirectToPage(new { ReturnUrl = returnUrl });
+        }
+
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            cart.RemoveItem(cart.Items.First(x => x.Book.BookId == bookId).Book);
 
             return RedirectToPage(new { ReturnUrl = returnUrl });
         }
